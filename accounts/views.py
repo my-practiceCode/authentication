@@ -4,6 +4,7 @@ from django.contrib.auth.models import User
 from django.contrib.auth import authenticate, login , logout
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
+from accounts.models import *
 # Create your views here.
 
 def home(request):
@@ -38,7 +39,7 @@ def loginPage(request):
         user = authenticate(request, username=username, password=password)
         if user is not None:   # authentication successful
             login(request, user)
-            return redirect('/about/')
+            return redirect('/courses/')
         else:   # authentication failed
             messages.error(request, 'Invalid username or password')
             return redirect('login')  # redirect back to login page
@@ -51,5 +52,11 @@ def logoutPage(request):
     return redirect('login')
 
 @login_required(login_url='login')
-def about(request):
-    return render(request,'about.html')
+def courselist(request):
+    courses = Course.objects.all()
+    return render(request,'courselist.html',{'courses':courses})
+
+@login_required(login_url='login')
+def CourseDetail(request,pk):
+    course = Course.objects.get(pk=pk)
+    return render(request,'course_detail.html',{'course':course})

@@ -1,0 +1,39 @@
+{% extends 'header.html' %}
+
+{% block start %}
+   
+    <div class="container mt-5">
+        <table class="table">
+            <thead>
+                <tr>
+                    <th scope="col">#</th>
+                    <th scope="col">course name</th>
+                    <th scope="col">Description</th>
+                    <th scope="col">Instructor</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for course in courses %}
+                <tr>
+                    <th>{{forloop.counter}}</th>
+                    <td><a href="{% url 'coursedetail' course.id %}">{{course.title}}</a></td>
+                    <td>{{course.description}}</td>
+                    <td>{{course.instructor}}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+
+    <!-- <script>
+        // Add staggered animation to table rows
+        document.addEventListener('DOMContentLoaded', function() {
+            const rows = document.querySelectorAll('tbody tr');
+            rows.forEach((row, index) => {
+                row.style.animationDelay = `${0.1 + index * 0.1}s`;
+                row.classList.add('fade-in');
+            });
+        });
+    </script> -->
+
+{% endblock %}

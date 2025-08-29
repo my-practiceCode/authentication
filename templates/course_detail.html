@@ -1,0 +1,14 @@
+{% extends 'header.html' %}
+
+{% block start %}
+   
+<div class="card mx-auto mt-5" style="width: 18rem;">
+  <img src="{{course.image.url}}" class="card-img-top" alt="not found">
+  <div class="card-body">
+    <h5 class="card-title">{{course.title}}</h5>
+    <p class="card-text">{{course.description}}</p>
+    <a href="{% url 'courselist' %}" class="btn btn-primary">Courses List</a>
+  </div>
+</div>
+
+{% endblock %}
